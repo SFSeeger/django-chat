@@ -1,0 +1,4 @@
+Django
+channels
+mysqlclient
+channels_redis

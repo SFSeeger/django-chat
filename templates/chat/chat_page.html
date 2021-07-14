@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+</head>
+<body>
+<h1>Chat App</h1>
+{% if user.friends.all.exists %}
+{% for friend in user.friends.all %}
+    <button onclick="currClient(friend.name)">
+        {{ friend.name }}
+    </button>
+{% endfor %}
+    {% else %}
+    <h1>You have no friends</h1>
+    <a href="/friends">Find some !</a>
+{% endif %}
+<input id="message">
+<div id="messages"></div>
+<button id="send">Send</button>
+<script>
+    var currClient;
+    //important to close url lobby/ instead of lobby
+    var chatSocket = new WebSocket(
+        'ws://'+window.location.host+'/ws'+window.location.pathname + '{{user.name}}/'
+    )
+
+    chatSocket.onclose = (e) => {
+        console.log(e)
+    }
+
+    chatSocket.onmessage = (e) => {
+        var data = JSON.parse(e.data)
+            document.getElementById('messages').append(
+              data.message
+            )
+    }
+
+    document.getElementById('send').onclick = (e) => {
+        var payload = {
+            'type':'message',
+            'message':document.getElementById('message').value,
+            'client':currClient
+        }
+        chatSocket.send(JSON.stringify(payload))
+    }
+
+    console.log("{{user.name}}")
+
+    function changeClient(name){
+        currClient = name
+    }
+
+</script>
+</body>
+</html>

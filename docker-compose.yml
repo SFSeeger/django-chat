@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  db:
+    image: "mysql"
+    environment:
+      MYSQL_DATABASE: 'test'
+      MYSQL_ROOT_PASSWORD: '123456'
+  channels_db:
+    image: redis
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+
+networks:
+  web:
+  db:
+  channels_db:
+

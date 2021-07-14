@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Friends Page</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>Friends</h1>
+{% if user.friends.all.exists  %}
+    {% for friend in user.friends.all %}
+        {{ friend.name }}
+    {% endfor %}
+    {% else %}
+        <h1>Looks like you do not have any friends</h1>
+{% endif %}
+<input id="friend_request_name">
+<button id="submit_friend_request">Submit Friend request</button>
+<script>
+     var csrftoken = "{{ csrf_token }}";
+    $("#submit_friend_request").click(
+        function () {
+                 axios({
+                    method: 'post',
+                    url: '/friends/add/',
+                     //crsf token important even here
+                    headers: {"X-CSRFToken": csrftoken},
+                    csrftoken: csrftoken,
+                    data: {
+                        'name':$("#friend_request_name").val()
+                    },
+                 }).then(res => console.log(res['data'])).catch(e => console.log(e))
+                }
+    )
+
+</script>
+</body>
+</html>
