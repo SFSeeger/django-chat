@@ -15,6 +15,7 @@ class User(models.Model):
     chats = models.ManyToManyField("chat.Chat")
     friends = models.ManyToManyField("login.User")
     friend_requests = models.ManyToManyField("login.User", related_name="requests")
+    friend_pending = models.ManyToManyField("login.User", related_name="pending")
 
     def __str__(self):
         return self.name

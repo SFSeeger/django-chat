@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <h1>Chat App</h1>
 {% if user.friends.all.exists %}
 {% for friend in user.friends.all %}
-    <button onclick="currClient(friend.name)">
+    <button onclick="changeClient('{{ friend.name }}')">
         {{ friend.name }}
     </button>
 {% endfor %}
@@ -21,6 +23,7 @@
 <button id="send">Send</button>
 <script>
     var currClient;
+    var csrftoken = "{{ csrf_token }}"
     //important to close url lobby/ instead of lobby
     var chatSocket = new WebSocket(
         'ws://'+window.location.host+'/ws'+window.location.pathname + '{{user.name}}/'
@@ -46,11 +49,21 @@
         chatSocket.send(JSON.stringify(payload))
     }
 
-    console.log("{{user.name}}")
-
     function changeClient(name){
         currClient = name
+        axios({
+            method:'post',
+            url: '/chat/getChatMsg/',
+            headers: {"X-CSRFToken": csrftoken},
+            csrftoken: csrftoken,
+            data: {
+                'client':currClient
+            }
+        }).then(res => console.log(res))
+        console.log(currClient)
     }
+
+    console.log('{{ user.name }}')
 
 </script>
 </body>

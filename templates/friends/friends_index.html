@@ -8,19 +8,32 @@
 </head>
 <body>
 <h1>Friends</h1>
-{% if user.friends.all.exists  %}
-    {% for friend in user.friends.all %}
-        {{ friend.name }}
-    {% endfor %}
-    {% else %}
-        <h1>Looks like you do not have any friends</h1>
-{% endif %}
+<div>
+    {% if user.friends.all.exists  %}
+        {% for friend in user.friends.all %}
+            {{ friend.name }}
+        {% endfor %}
+        {% else %}
+            <h1>Looks like you do not have any friends</h1>
+    {% endif %}
+</div>
+<div>
+    {% if user.friend_requests.all.exists %}
+        {% for friend in user.friend_requests.all %}
+            {{ friend.name }}
+            <button onclick="accept_friend('{{ friend.name }}')">Accept</button>
+        {% endfor %}
+        {% else %}
+        <h1>You do not have friend requests</h1>
+    {% endif %}
+</div>
 <input id="friend_request_name">
 <button id="submit_friend_request">Submit Friend request</button>
+<p id="msg"></p>
 <script>
-     var csrftoken = "{{ csrf_token }}";
-    $("#submit_friend_request").click(
-        function () {
+        var csrftoken = "{{ csrf_token }}";
+        $("#submit_friend_request").click(
+            function () {
                  axios({
                     method: 'post',
                     url: '/friends/add/',
@@ -28,11 +41,26 @@
                     headers: {"X-CSRFToken": csrftoken},
                     csrftoken: csrftoken,
                     data: {
-                        'name':$("#friend_request_name").val()
+                        'client':$("#friend_request_name").val(),
+                        'user':"{{ user.name }}"
                     },
-                 }).then(res => console.log(res['data'])).catch(e => console.log(e))
+                 }).then(res => res['data']).then(json => $("#msg").text(json['msg'])).catch(e => console.log(e))
                 }
-    )
+            )
+
+        function accept_friend(name){
+            console.log(name)
+            axios({
+                method: 'post',
+                url: '/friends/accept/',
+                headers: {"X-CSRFToken": csrftoken},
+                csrftoken: csrftoken,
+                data: {
+                    'user':name,
+                    'client':"{{ user.name }}"
+                }
+            }).then(res => res['data']).then(json => $("#msg").text(json['msg'])).catch(e => console.log(e))
+        }
 
 </script>
 </body>

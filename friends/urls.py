@@ -4,5 +4,6 @@ from friends.views import *
 
 urlpatterns = [
     path('', friends_page),
-    path('add/', add_friend)
+    path('add/', add_friend),
+    path('accept/', accept_friend)
 ]
