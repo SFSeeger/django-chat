@@ -25,6 +25,11 @@ def add_friend(request):
     body = json.loads(request.body)
     sender = body['user']
     client = body['client']
+    if sender == client:
+        payload = {
+            'msg': "You can not add yourself"
+        }
+        return JsonResponse(payload)
     sender_check = User.objects.filter(name=sender).exists()
     if not sender_check:
         return HttpResponse("User does not exist")

@@ -1,0 +1,40 @@
+.header {
+    background-color: lightblue;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.li {
+    display: inline;
+    float: left
+}
+
+.p {
+    float: right;
+    flex:3;
+    height: 100%;
+}
+
+.msg_input {
+    padding-bottom: 10px;
+    background-color: lightblue;
+    flex: 2;
+}
+
+.send_button {
+    float: right;
+}
+
+.button_msg_holder {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: flex;
+    justify-content: flex-start;
+}
