@@ -38,6 +38,7 @@
             document.getElementById('messages').append(
               data.message
             )
+        console.log(data)
     }
 
     document.getElementById('send').onclick = (e) => {
@@ -59,7 +60,7 @@
             data: {
                 'client':currClient
             }
-        }).then(res => console.log(res))
+        }).then(res => res['data']).then(proc => proc.forEach(elem => ))
         console.log(currClient)
     }
 

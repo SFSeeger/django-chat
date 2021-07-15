@@ -72,6 +72,7 @@ class ChatConsumer(WebsocketConsumer):
             client,
             {
                 'type': 'chat_message',
+                'author': self.user.name,
                 'message': message
             }
         )
