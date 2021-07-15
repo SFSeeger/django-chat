@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="{% static 'chat.css' %}">
 </head>
 <body>
 <h1>Chat App</h1>
@@ -51,6 +53,8 @@
     }
 
     function changeClient(name){
+        var messages = $("#messages")
+        messages.empty()
         currClient = name
         axios({
             method:'post',
@@ -60,7 +64,7 @@
             data: {
                 'client':currClient
             }
-        }).then(res => res['data']).then(proc => proc.forEach(elem => ))
+        }).then(res => res['data']).then(proc => proc.forEach(elem => messages.append(elem['fields'].content + "<br />")))
         console.log(currClient)
     }
 
