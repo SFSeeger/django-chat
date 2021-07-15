@@ -87,7 +87,7 @@ class ChatConsumer(WebsocketConsumer):
         message = event['message']
 
         self.send(text_data=json.dumps({
-            'message':message
+            'message': message
         }))
 
 
