@@ -32,7 +32,7 @@
     )
 
     chatSocket.onclose = (e) => {
-        console.log(e)
+        $("#messages").append()
     }
 
     chatSocket.onmessage = (e) => {
@@ -50,6 +50,8 @@
             'client':currClient
         }
         chatSocket.send(JSON.stringify(payload))
+        $("#messages").append(document.getElementById('message').value)
+        $("#message").val('')
     }
 
     function changeClient(name){
