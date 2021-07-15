@@ -3,7 +3,7 @@ ___
 ## How to Run
 ___
 With docker compose everything you need to run the app will be provided<br />
-###Attention: when using docker compose you need to run the command in debug.txt in the mysql container in order to work properly 
+### Attention: when using docker compose you need to run the command in debug.txt in the mysql container in order to work properly 
 ````shell
 docker-compose up
 ````
@@ -83,13 +83,13 @@ ___
             sign_up.html
 
 ````
-####chat:
+#### chat:
 Handles the main chat feature of the app with websockets and the required routes and database options to make it all work
-####friends:
+#### friends:
 Friends feature to add and remove friends with all routes and no models
-####login
+#### login
 Handles account management 
-###Special Things:
+### Special Things:
 The helper function in chat is there to check for chats
 ## Requirements
 ___
