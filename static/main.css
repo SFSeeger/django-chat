@@ -29,12 +29,45 @@
 
 .send_button {
     float: right;
+    border: none;
+    background-color: lightblue;
 }
 
 .button_msg_holder {
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    left: 50%;
+    width: 100%;
+    justify-content: center;
     display: flex;
-    justify-content: flex-start;
+}
+
+.messages {
+    zoom: 3
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.friends {
+        border: none;
+        background-color: lightblue;
+}
+
+.send_request {
+    border: none;
+    background-color: lightblue;
+}
+
+button:hover {
+    background-color: lightgreen;
+}
+
+button {
+    background-color: lightblue;
+    border: none;
 }

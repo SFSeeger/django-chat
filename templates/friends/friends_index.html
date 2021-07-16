@@ -9,7 +9,7 @@
 <div>
     {% if user.friends.all.exists  %}
         {% for friend in user.friends.all %}
-            {{ friend.name }}
+            <p class="friends">{{ friend.name }}</p>
         {% endfor %}
         {% else %}
             <h1>Looks like you do not have any friends</h1>

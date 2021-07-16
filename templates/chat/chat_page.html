@@ -4,12 +4,12 @@
 Chat
 {% endblock %}
 {% block content %}
-<h1>Chat App</h1>
+<h1 id="display">Chat App</h1>
 <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/axios.min.js' %}"></script>
 {% if user.friends.all.exists %}
 {% for friend in user.friends.all %}
-    <button onclick="changeClient('{{ friend.name }}')">
+    <button onclick="changeClient('{{ friend.name }}')" class="friends">
         {{ friend.name }}
     </button>
 {% endfor %}
@@ -17,10 +17,10 @@ Chat
     <h1>You have no friends</h1>
     <a href="/friends">Find some !</a>
 {% endif %}
-<div id="messages"></div>
+<div id="messages" class="messages"></div>
     <div class="button_msg_holder">
         <input id="message" class="msg_input">
-        <button id="send" class="send_button">Send</button>
+        <button id="send" class="send_request">Send</button>
     </div>
 
 <script>
@@ -37,9 +37,13 @@ Chat
 
     chatSocket.onmessage = (e) => {
         var data = JSON.parse(e.data)
+        var author = data['author']
+        if(author === currClient){
             document.getElementById('messages').append(
               data.message
             )
+        }
+
         console.log(data)
     }
 
@@ -58,6 +62,7 @@ Chat
         var messages = $("#messages")
         messages.empty()
         currClient = name
+        $('display').val()
         axios({
             method:'post',
             url: '/chat/getChatMsg/',
