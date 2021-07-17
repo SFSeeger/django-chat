@@ -1,7 +1,6 @@
 import json
 
 from channels.generic.websocket import WebsocketConsumer
-import channels.layers
 from asgiref.sync import async_to_sync
 
 from chat.helper import check_for_chat
@@ -9,7 +8,6 @@ from chat.models import Message, Chat
 from login.models import User
 
 
-#TODO:Right json implementation !!!!!
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
@@ -20,7 +18,6 @@ class ChatConsumer(WebsocketConsumer):
         )
 
         self.user = User.objects.filter(name=self.room_name)[0]
-        print(self.user)
 
         if not self.user:
             async_to_sync(self.channel_layer.group_send)(
@@ -42,7 +39,6 @@ class ChatConsumer(WebsocketConsumer):
             self.channel_name
         )
         self.user.socket_state = 'away'
-        print(code)
 
     def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)

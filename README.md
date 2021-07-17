@@ -1,5 +1,12 @@
 # Django Chat App
 ___
+## Description
+___
+Like you see from the name this is a chat app developed with the backend framework django. I tried to be as versatile as possible 
+for example used websockets with <strong>django_channels</strong> package which required me do use redis as signaling and channel layer manager.
+In the frontend i used at first plain <strong>javascript</strong> but later switched to <strong>jquery</strong>. My project heavily relies on <strong>docker</strong> (redis, mysql)
+so i made it possible to run it all with one docker-compose command.Because django has a different way of coding as i am used to by reason of django does support ond rely on the templating engine the way a was use to do it was 
+making a frontent in <stong>Vue, React or Angular</strong> and serving this as static (<strong>e.g. Spring Boot, Nest.js, Express.js</strong>) while the backend only serves the data. Thats why my app is relying on <strong>Axios</strong> to make 'reactive' request to the server on the fly without using websockets
 ## How to Run
 ___
 With docker compose everything you need to run the app will be provided<br />
@@ -15,7 +22,7 @@ docker run -p 8000:8000 django-chat
 When you don't have docker installed you can use the standard django run command
 ````shell
 pytohn manage.py runserver
-#If you want to reach the webserver from ouside your local machine use this:
+#If you want to reach the webserver from outside your local machine use this:
 pytohn manage.py runserver 0.0.0.0:8000
 ````
 ## Functionality

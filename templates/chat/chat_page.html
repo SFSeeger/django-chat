@@ -71,7 +71,9 @@ Chat
             data: {
                 'client':currClient
             }
-        }).then(res => res['data']).then(proc => proc.forEach(elem => messages.append(elem['fields'].content + "<br />")))
+        }).then(res => res['data']).then(proc => proc.forEach(elem =>
+            messages.append(
+                elem['fields'].content + "<br />")))
         console.log(currClient)
     }
 
