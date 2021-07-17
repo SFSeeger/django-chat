@@ -2,6 +2,7 @@ version: '3.3'
 services:
   db:
     image: "mysql"
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_DATABASE: 'test'
       MYSQL_ROOT_PASSWORD: '123456'
@@ -9,11 +10,14 @@ services:
     image: redis
   web:
     build: .
+    depends_on:
+      - db
+      - channels_db
     ports:
       - "8000:8000"
 
 networks:
-  web:
   db:
   channels_db:
+  web:
 

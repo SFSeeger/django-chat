@@ -2,15 +2,17 @@
 ___
 ## Description
 ___
-Like you see from the name this is a chat app developed with the backend framework django. I tried to be as versatile as possible 
-for example used websockets with <strong>django_channels</strong> package which required me do use redis as signaling and channel layer manager.
-In the frontend i used at first plain <strong>javascript</strong> but later switched to <strong>jquery</strong>. My project heavily relies on <strong>docker</strong> (redis, mysql)
-so i made it possible to run it all with one docker-compose command.Because django has a different way of coding as i am used to by reason of django does support ond rely on the templating engine the way a was use to do it was 
-making a frontent in <stong>Vue, React or Angular</strong> and serving this as static (<strong>e.g. Spring Boot, Nest.js, Express.js</strong>) while the backend only serves the data. Thats why my app is relying on <strong>Axios</strong> to make 'reactive' request to the server on the fly without using websockets
+As the name already says this is a chat app developed with the backend framework <strong>django</strong>. 
+I tried to be as versatile as possible for example using websockets with the <strong>django_channels</strong> package which required me to use redis as signaling and
+channel layer manager. For the frontend i first used plain <strong>javascript</strong>, but later switched to <strong>jquery</strong>.
+My project heavily relies on <strong>docker</strong> (redis, mysql) so i made it possible to run it all with one docker-compose command. 
+Django, relying on the <strong>templating engine</strong>, rendered my usual coding style not really usable for making native frontend applications for django 
+(making a frontent in Vue, React or Angular and serving this as static (e.g. like in <strong> Spring Boot, Nest.js, Express.js</strong>) while the backend only serves the data),
+so i was forced to use <strong>Axios</strong>, to make kind of 'reactive' requests to the server on the fly without using websockets
 ## How to Run
 ___
 With docker compose everything you need to run the app will be provided<br />
-### Attention: when using docker compose you need to run the command in debug.txt in the mysql container in order to work properly 
+### Attention: You have to apply migrations to the database over the docker web container
 ````shell
 docker-compose up
 ````

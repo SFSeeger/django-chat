@@ -6,4 +6,6 @@ RUN pip install -r requirements.txt
 COPY . /code/
 EXPOSE 8000
 #bind to port 0.0.0.0 insead of 127.0.0.1
+CMD ["python", "manage.py", "makemigrations"]
+CMD ["python", "manage.py", "migrate"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
