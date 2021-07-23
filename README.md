@@ -23,9 +23,9 @@ docker run -p 8000:8000 django-chat
 ````
 When you don't have docker installed you can use the standard django run command
 ````shell
-pytohn manage.py runserver
+python manage.py runserver
 #If you want to reach the webserver from outside your local machine use this:
-pytohn manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8000
 ````
 ## Functionality
 ___
