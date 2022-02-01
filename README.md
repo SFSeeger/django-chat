@@ -112,6 +112,5 @@ ___
 - redis
 - python 3.0
 
-
-
-
+### Additional notices
+- Using [wait-for-it](https://github.com/vishnubob/wait-for-it)
